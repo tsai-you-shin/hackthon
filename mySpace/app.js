@@ -304,6 +304,7 @@ class Volcano {
     }
 }
 
+
 // Wait for images and font
 window.onload = drawStartScreen;
 
@@ -351,7 +352,7 @@ function initGame() {
 function updateEverything() {
     if (gameState.deathScreen) return;
   
-    //if (gameState.asteroids.length <= gameState.maxAsteroids) generateAsteroids();
+    if (gameState.asteroids.length <= gameState.maxAsteroids) generateAsteroids();
     //if (gameState.volcanoes.length <= gameState.maxVolcanoes) generateVolcanoes();
     gameState.player.update();
   
@@ -635,4 +636,27 @@ function rand(min, max) {
   
     return Math.floor(Math.random() * (max - min) + min);
 }
+
+class Earth {
+    constructor(CANVAS_BOTTOM,CANVAS_RIGHT){
+        this.width = 150;
+        this.height= 120;
+
+        this.position={
+            x:CANVAS_RIGHT/2,
+            y:CANVAS_BOTTOM/2
+        };
+    }
+    draw(ctx){
+        var img = document.getElementById("earth");
+        ctx.drawImage(img, this.position.x-120, this.position.y-100,this.width,this.height);
+    }   
+}
+let earth = new Earth(CANVAS_BOTTOM,CANVAS_RIGHT);
+earth.draw(ctx);
+function gameLoop(timeStamp){
+    earth.draw(ctx);
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();
   
