@@ -193,7 +193,7 @@ class Player {
         if (this.pos.y >= CANVAS_BOTTOM - PLAYER_HEIGHT) handleDeath("jupiter");
         if (this.hasCollision(gameState.asteroids)) handleDeath("asteroid");
         if (this.hasCollision(gameState.volcanoes)) handleDeath("volcano");
-        if (this.pos.x>earth.position.x && this.pos.y>earth.position.y){
+        if (this.pos.x>earth.position.x+150 && this.pos.y>earth.position.y){
             handleDeath("Safe");
         }
     
@@ -336,6 +336,24 @@ class Volcano {
     }
 }
 
+class Earth {
+  constructor(CANVAS_BOTTOM,CANVAS_RIGHT){
+      this.width = 500;
+      this.height= 300;
+
+      this.position={
+          x:CANVAS_RIGHT,
+          y:CANVAS_BOTTOM-300
+      };
+  }
+  draw(ctx){
+      var img = document.getElementById("earth");
+      ctx.drawImage(img, this.position.x, this.position.y,this.width,this.height);
+  }
+  update(){
+      this.position.x -= 1;
+  }   
+}
 
 // Wait for images and font
 window.onload = drawStartScreen;
@@ -378,6 +396,7 @@ function initGame() {
       1000
     );
   
+    earth = new Earth(CANVAS_BOTTOM,CANVAS_RIGHT);
     renderDOMUI();
 }
 
@@ -475,6 +494,7 @@ function generateVolcanoes() {
     } else {
       // Game Objects
       gameState.player.draw(ctx);
+      earth.draw(ctx);
       gameState.asteroids.forEach(asteroid => asteroid.draw(ctx));
       gameState.volcanoes.forEach(volcano => volcano.draw(ctx));
   
@@ -721,30 +741,3 @@ function rand(min, max) {
   
     return Math.floor(Math.random() * (max - min) + min);
 }
-
-class Earth {
-    constructor(CANVAS_BOTTOM,CANVAS_RIGHT){
-        this.width = 500;
-        this.height= 300;
-
-        this.position={
-            x:CANVAS_RIGHT,
-            y:CANVAS_BOTTOM-300
-        };
-    }
-    draw(ctx){
-        var img = document.getElementById("earth");
-        ctx.drawImage(img, this.position.x-200, this.position.y,this.width,this.height);
-    }
-    update(){
-        this.position.x -= 1;
-    }   
-}
-//做了很多次
-let earth = new Earth(CANVAS_BOTTOM,CANVAS_RIGHT);
-earth.draw(ctx);
-function gameLoop(timeStamp){
-  earth.draw(ctx);
-  requestAnimationFrame(gameLoop);
-}
-gameLoop();
