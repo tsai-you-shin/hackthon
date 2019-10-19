@@ -112,6 +112,22 @@ class Ball{
     }
 }
 
+class Earth{
+    constructor(gameWidth,gameHeight){
+        this.image = document.getElementById("earth");
+
+        this.gameWidth = gameWidth;
+        this.gameHeight = gameHeight;
+
+        this.position = { x:GAME_WIDTH/2,y:GAME_HEIGHT/2};
+        //this.speed = {x:2,y:2};
+        this.size = 100;
+    }
+    draw(ctx){
+        ctx.drawImage(this.image,this.position.x,this.position.y,this.size,this.size);
+    }
+}
+
 let paddle = new Paddle(GAME_WIDTH,GAME_HEIGHT);
 let ball = new Ball(GAME_WIDTH,GAME_HEIGHT);
 
@@ -124,6 +140,8 @@ let lastTime = 0;
 let imageBall = document.getElementById('img_ball');
 ctx.drawImage(imageBall,GAME_WIDTH/2,GAME_HEIGHT/2,100,100);
 
+let earth = new Earth(GAME_WIDTH,GAME_HEIGHT);
+
 function gameLoop(timeStamp){
     let deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
@@ -133,8 +151,9 @@ function gameLoop(timeStamp){
     ball.draw(ctx);
     paddle.update(deltaTime);
     paddle.draw(ctx);
-    
 
+    earth.draw(ctx);
+    //ctx.drawImage(Earth,GAME_WIDTH/2,GAME_HEIGHT/2,100,100);
     requestAnimationFrame(gameLoop);
 }
 
