@@ -465,28 +465,28 @@ function drawStartScreen() {
       () => moveBackground(),
       1000 / FPS
     );
-  
+        
     ctx.save();
   
     ctx.textAlign = "center";
     ctx.fillStyle = "orange";
-    ctx.font = "bold 90px Orbitron";
+    ctx.font = "bold 75px Orbitron";
     ctx.fillText("Spaceman on Jupiter", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 100);
   
     ctx.fillStyle = TEXT_COLOR;
-    ctx.font = "40px Orbitron";
+    ctx.font = "30px Orbitron";
     ctx.fillText(
       "CONTROLS: UP to thrust, LEFT and RIGHT to move",
       CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 300
+      CANVAS_BOTTOM - 350
     );
     ctx.fillText(
       "OBJECTIVE: Survive as long as you can",
       CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 220
+      CANVAS_BOTTOM - 280
     );
   
-    ctx.font = "30px Orbitron";
+    ctx.font = "25px Orbitron";
     ctx.fillText("Click to Start", CANVAS_CENTRE_X, CANVAS_BOTTOM - 50);
   
     ctx.restore();
@@ -500,28 +500,28 @@ function drawDeathScreen() {
     
         ctx.textAlign = "center";
         ctx.fillStyle = death[gameState.deathReason].color;
-        ctx.font = "50px Orbitron";
+        ctx.font = "40px Orbitron";
         ctx.fillText(
         death[gameState.deathReason].msg,
         CANVAS_CENTRE_X,
-        CANVAS_BOTTOM - 450
+        CANVAS_BOTTOM - 500
         );
     
-        ctx.font = "30px Orbitron";
+        ctx.font = "20px Orbitron";
         ctx.fillText(
         "Attempt: " + gameState.attempt,
         CANVAS_CENTRE_X,
-        CANVAS_BOTTOM - 300
+        CANVAS_BOTTOM - 350
         );
         ctx.fillText(
         "Score: " + gameState.score,
         CANVAS_CENTRE_X,
-        CANVAS_BOTTOM - 250
+        CANVAS_BOTTOM - 300
         );
         ctx.fillText(
         "Time: " + gameState.timeInSeconds + " second(s)",
         CANVAS_CENTRE_X,
-        CANVAS_BOTTOM - 200
+        CANVAS_BOTTOM - 100
         );
         ctx.fillText(
         "Best Attempt: " +
@@ -540,7 +540,7 @@ function drawDeathScreen() {
         ctx.fillText("Click to play again", CANVAS_CENTRE_X, CANVAS_BOTTOM - 50);
     
         ctx.fillStyle = "red";
-        ctx.font = "bold 200px Orbitron";
+        ctx.font = "bold 150px Orbitron";
         ctx.fillText("You died", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 200);
     
         ctx.restore();
@@ -550,14 +550,14 @@ function drawDeathScreen() {
     
         ctx.textAlign = "center";
         ctx.fillStyle = death[gameState.deathReason].color;
-        ctx.font = "50px Orbitron";
+        ctx.font = "40px Orbitron";
         ctx.fillText(
         death[gameState.deathReason].msg,
         CANVAS_CENTRE_X,
         CANVAS_BOTTOM - 450
         );
     
-        ctx.font = "30px Orbitron";
+        ctx.font = "20px Orbitron";
         ctx.fillText(
         "Attempt: " + gameState.attempt,
         CANVAS_CENTRE_X,
@@ -589,9 +589,9 @@ function drawDeathScreen() {
         );
         ctx.fillText("Click to play again", CANVAS_CENTRE_X, CANVAS_BOTTOM - 50);
     
-        ctx.fillStyle = "red";
-        ctx.font = "bold 200px Orbitron";
-        ctx.fillText("You win", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 200);
+        ctx.fillStyle = "green";
+        ctx.font = "bold 75px Orbitron";
+        ctx.fillText("You Live", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 200);
     
         ctx.restore();
     }
@@ -699,8 +699,8 @@ function rand(min, max) {
 
 class Earth {
     constructor(CANVAS_BOTTOM,CANVAS_RIGHT){
-        this.width = 350;
-        this.height= 240;
+        this.width = 500;
+        this.height= 300;
 
         this.position={
             x:CANVAS_RIGHT,
@@ -709,7 +709,7 @@ class Earth {
     }
     draw(ctx){
         var img = document.getElementById("earth");
-        ctx.drawImage(img, this.position.x-180, this.position.y-150,this.width,this.height);
+        ctx.drawImage(img, this.position.x-300, this.position.y-400,this.width,this.height);
     }   
 }
 let earth = new Earth(CANVAS_BOTTOM,CANVAS_RIGHT);
