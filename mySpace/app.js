@@ -493,56 +493,108 @@ function drawStartScreen() {
 }
 
 function drawDeathScreen() {
-    DEATH_SCREEN_SOUND.play();
+    if(gameState.deathReason!="Safe"){
+        DEATH_SCREEN_SOUND.play();
   
-    ctx.save();
-  
-    ctx.textAlign = "center";
-    ctx.fillStyle = death[gameState.deathReason].color;
-    ctx.font = "50px Orbitron";
-    ctx.fillText(
-      death[gameState.deathReason].msg,
-      CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 450
-    );
-  
-    ctx.font = "30px Orbitron";
-    ctx.fillText(
-      "Attempt: " + gameState.attempt,
-      CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 300
-    );
-    ctx.fillText(
-      "Score: " + gameState.score,
-      CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 250
-    );
-    ctx.fillText(
-      "Time: " + gameState.timeInSeconds + " second(s)",
-      CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 200
-    );
-    ctx.fillText(
-      "Best Attempt: " +
-        gameState.highestScore +
-        " points | " +
-        gameState.highestTime +
-        " second(s)",
-      CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 100
-    );
-    ctx.fillText(
-      death[gameState.deathReason].explanation,
-      CANVAS_CENTRE_X,
-      CANVAS_BOTTOM - 400
-    );
-    ctx.fillText("Click to play again", CANVAS_CENTRE_X, CANVAS_BOTTOM - 50);
-  
-    ctx.fillStyle = "red";
-    ctx.font = "bold 200px Orbitron";
-    ctx.fillText("You died", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 200);
-  
-    ctx.restore();
+        ctx.save();
+    
+        ctx.textAlign = "center";
+        ctx.fillStyle = death[gameState.deathReason].color;
+        ctx.font = "50px Orbitron";
+        ctx.fillText(
+        death[gameState.deathReason].msg,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 450
+        );
+    
+        ctx.font = "30px Orbitron";
+        ctx.fillText(
+        "Attempt: " + gameState.attempt,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 300
+        );
+        ctx.fillText(
+        "Score: " + gameState.score,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 250
+        );
+        ctx.fillText(
+        "Time: " + gameState.timeInSeconds + " second(s)",
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 200
+        );
+        ctx.fillText(
+        "Best Attempt: " +
+            gameState.highestScore +
+            " points | " +
+            gameState.highestTime +
+            " second(s)",
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 100
+        );
+        ctx.fillText(
+        death[gameState.deathReason].explanation,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 400
+        );
+        ctx.fillText("Click to play again", CANVAS_CENTRE_X, CANVAS_BOTTOM - 50);
+    
+        ctx.fillStyle = "red";
+        ctx.font = "bold 200px Orbitron";
+        ctx.fillText("You died", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 200);
+    
+        ctx.restore();
+    }
+    else{
+        ctx.save();
+    
+        ctx.textAlign = "center";
+        ctx.fillStyle = death[gameState.deathReason].color;
+        ctx.font = "50px Orbitron";
+        ctx.fillText(
+        death[gameState.deathReason].msg,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 450
+        );
+    
+        ctx.font = "30px Orbitron";
+        ctx.fillText(
+        "Attempt: " + gameState.attempt,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 300
+        );
+        ctx.fillText(
+        "Score: " + gameState.score,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 250
+        );
+        ctx.fillText(
+        "Time: " + gameState.timeInSeconds + " second(s)",
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 200
+        );
+        ctx.fillText(
+        "Best Attempt: " +
+            gameState.highestScore +
+            " points | " +
+            gameState.highestTime +
+            " second(s)",
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 100
+        );
+        ctx.fillText(
+        death[gameState.deathReason].explanation,
+        CANVAS_CENTRE_X,
+        CANVAS_BOTTOM - 400
+        );
+        ctx.fillText("Click to play again", CANVAS_CENTRE_X, CANVAS_BOTTOM - 50);
+    
+        ctx.fillStyle = "red";
+        ctx.font = "bold 200px Orbitron";
+        ctx.fillText("You win", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 200);
+    
+        ctx.restore();
+    }
 }
 
 function renderDOMUI() {
