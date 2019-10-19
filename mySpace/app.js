@@ -47,8 +47,16 @@ let timeDOM = document.getElementById("time");   //counting time
 // ART
 let bgPos = 30;
 const TEXT_COLOR = "white";
-const ASTEROID_IMG = new Image();
-ASTEROID_IMG.src = "images/asteroid_small_square.png";
+const ASTEROID_IMG1 = new Image();
+ASTEROID_IMG1.src = "images/asteroid_small_square.png";
+
+const ASTEROID_IMG2 = new Image();
+ASTEROID_IMG2.src = "images/meteur.jpg";
+//const ASTEROID_IMG3 = new Image();
+//ASTEROID_IMG3.src = "images/asteroid_small_square.png";
+//const ASTEROID_IMG4 = new Image();
+//ASTEROID_IMG4.src = "images/asteroid_small_square.png";
+
 const VOLCANO_UP_IMG = new Image();
 VOLCANO_UP_IMG.src = "images/fireball_square.png";
 const VOLCANO_DOWN_IMG = new Image();
@@ -82,8 +90,8 @@ let gameState = {
     highestScore: 0,
     highestTime: 0,
     // Difficulty variables
-    maxAsteroids: 1000,
-    asteroidSpeedMax: 1000,
+    maxAsteroids: 10,
+    asteroidSpeedMax: 10,
     maxVolcanoes: 10,
     volcanoSpeedMax: 10,
     volcanoChance: 10,
@@ -185,7 +193,7 @@ class Player {
         if (this.pos.y >= CANVAS_BOTTOM - PLAYER_HEIGHT) handleDeath("jupiter");
         if (this.hasCollision(gameState.asteroids)) handleDeath("asteroid");
         if (this.hasCollision(gameState.volcanoes)) handleDeath("volcano");
-        if (this.pos.x>CANVAS_RIGHT-200 && this.pos.y>CANVAS_BOTTOM-200){
+        if (this.pos.x>earth.position.x && this.pos.y>earth.position.y){
             handleDeath("Safe");
         }
     
@@ -283,8 +291,13 @@ class Asteroid {
       ctx.save();
   
       ctx.translate(-ASTEROID_SIZE / 2, -ASTEROID_SIZE / 2);
-      ctx.drawImage(ASTEROID_IMG, this.pos.x, this.pos.y);
-  
+      var temp = Math.floor((Math.random() * 10) + 1);
+      if(temp % 2 == 0){
+        ctx.drawImage(ASTEROID_IMG1, this.pos.x, this.pos.y);
+      }
+      else{
+        ctx.drawImage(ASTEROID_IMG1, this.pos.x, this.pos.y);
+      }
       ctx.restore();
     }
 }
@@ -374,7 +387,8 @@ function updateEverything() {
     if (gameState.asteroids.length <= gameState.maxAsteroids) generateAsteroids();
     //if (gameState.volcanoes.length <= gameState.maxVolcanoes) generateVolcanoes();
     gameState.player.update();
-  
+    earth.update();
+
     // For Score
     let initialAsteroids = gameState.asteroids.length;
   
@@ -715,20 +729,22 @@ class Earth {
 
         this.position={
             x:CANVAS_RIGHT,
-            y:CANVAS_BOTTOM
+            y:CANVAS_BOTTOM-300
         };
     }
     draw(ctx){
         var img = document.getElementById("earth");
-        ctx.drawImage(img, this.position.x-300, this.position.y-400,this.width,this.height);
+        ctx.drawImage(img, this.position.x-200, this.position.y,this.width,this.height);
+    }
+    update(){
+        this.position.x -= 1;
     }   
 }
+//做了很多次
 let earth = new Earth(CANVAS_BOTTOM,CANVAS_RIGHT);
 earth.draw(ctx);
 function gameLoop(timeStamp){
-    earth.draw(ctx);
-    requestAnimationFrame(gameLoop);
+  earth.draw(ctx);
+  requestAnimationFrame(gameLoop);
 }
 gameLoop();
-
-  
