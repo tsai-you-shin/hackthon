@@ -7,7 +7,6 @@
         <title>Spaceman On Jupiter - A JavaScript Game</title>
     </head>
     <body>
-        <body scroll="no" style="overflow: hidden">
         <div id="container">
             <div id="ui">
                 <p id="score">Score: 0</p>
@@ -15,7 +14,7 @@
                 <p id="time">Time: 0</p>
                 <!--the Time text line-->
             </div>
-            <canvas id="canvas" width="1200" height="800" ></canvas>
+            <canvas id="canvas" width="1170" height="740" ></canvas>
         </div>
             
         <!-- Just to force Google Font load before canvas -->
@@ -23,6 +22,13 @@
         <img id="earth" src="images/NoBackEarth.png" style="display:none">
     
         <script src="app.js"></script>
+        <form>
+            <!--<input type="value" id="number" />-->
+            <font color="white">Try Number of Debris:</font>
+            <button type="button" onclick="InputFunction10();">10</button>
+            <button type="button" onclick="InputFunction100();">100</button>
+            <button type="button" onclick="InputFunction1000();">1000</button>
+        </form>
     </body>
 
-</html>>
+</html>

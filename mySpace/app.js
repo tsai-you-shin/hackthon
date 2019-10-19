@@ -95,6 +95,17 @@ let gameState = {
     gameDOMUIInterval: 0
   };
 
+function InputFunction10(){
+  gameState.maxAsteroids = 10;   
+}
+function InputFunction100(){
+  gameState.maxAsteroids = 100;   
+}
+function InputFunction1000(){
+  gameState.maxAsteroids = 1000;   
+}
+
+
 // Death Messages
 let death = {
     volcano: {
