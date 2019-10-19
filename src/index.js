@@ -84,7 +84,36 @@ class Paddle {
     }
 }
 
+class Ball{
+    constructor(gameWidth,gameHeight){
+        this.image = document.getElementById("img_ball");
+
+        this.gameWidth = gameWidth;
+        this.gameHeight = gameHeight;
+
+        this.position = { x:10,y:10};
+        this.speed = {x:2,y:2};
+        this.size = 100;
+    }
+
+    draw(ctx){
+        ctx.drawImage(imageBall,this.position.x,this.position.y,this.size,this.size);
+    }
+    update(deltaTime){
+        this.position.x += this.speed.x;
+        this.position.y += this.speed.y;
+        
+        if(this.position.x + this.size > this.gameWidth || this.position.x<0){
+            this.speed.x = -this.speed.x;
+        }
+        if(this.position.y + this.size > this.gameHeight || this.position.y<0){
+            this.speed.y = -this.speed.y;
+        }
+    }
+}
+
 let paddle = new Paddle(GAME_WIDTH,GAME_HEIGHT);
+let ball = new Ball(GAME_WIDTH,GAME_HEIGHT);
 
 new InputHandler(paddle);
 
@@ -93,12 +122,15 @@ paddle.draw(ctx);
 let lastTime = 0;
 
 let imageBall = document.getElementById('img_ball');
-ctx.drawImage(imageBall,10,10,20,20);
+ctx.drawImage(imageBall,GAME_WIDTH/2,GAME_HEIGHT/2,100,100);
 
 function gameLoop(timeStamp){
     let deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
     ctx.clearRect(0,0,800,600);
+    //ctx.drawImage(imageBall,GAME_WIDTH/2,GAME_HEIGHT/2,100,100);
+    ball.update(deltaTime);
+    ball.draw(ctx);
     paddle.update(deltaTime);
     paddle.draw(ctx);
     
