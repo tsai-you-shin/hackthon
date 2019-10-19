@@ -116,6 +116,11 @@ let death = {
       msg: "You found the Flying Spaghetti Monster...",
       color: "lightskyblue",
       explanation: "Don't leave orbit"
+    },
+    Safe: {
+      msg: "Safe and Sound!!!",
+      color: "green",
+      explanation: "Don't leave orbit"
     }
 };
 
@@ -169,6 +174,9 @@ class Player {
         if (this.pos.y >= CANVAS_BOTTOM - PLAYER_HEIGHT) handleDeath("jupiter");
         if (this.hasCollision(gameState.asteroids)) handleDeath("asteroid");
         if (this.hasCollision(gameState.volcanoes)) handleDeath("volcano");
+        if (this.pos.x>CANVAS_RIGHT-200 && this.pos.y>CANVAS_BOTTOM-200){
+            handleDeath("Safe");
+        }
     
         // Gravity (DOWN)
         if (!this.thrusting && this.pos.y <= CANVAS_BOTTOM - PLAYER_HEIGHT) {
@@ -639,17 +647,17 @@ function rand(min, max) {
 
 class Earth {
     constructor(CANVAS_BOTTOM,CANVAS_RIGHT){
-        this.width = 150;
-        this.height= 120;
+        this.width = 350;
+        this.height= 240;
 
         this.position={
-            x:CANVAS_RIGHT/2,
-            y:CANVAS_BOTTOM/2
+            x:CANVAS_RIGHT,
+            y:CANVAS_BOTTOM
         };
     }
     draw(ctx){
         var img = document.getElementById("earth");
-        ctx.drawImage(img, this.position.x-120, this.position.y-100,this.width,this.height);
+        ctx.drawImage(img, this.position.x-180, this.position.y-150,this.width,this.height);
     }   
 }
 let earth = new Earth(CANVAS_BOTTOM,CANVAS_RIGHT);
@@ -659,4 +667,5 @@ function gameLoop(timeStamp){
     requestAnimationFrame(gameLoop);
 }
 gameLoop();
+
   
