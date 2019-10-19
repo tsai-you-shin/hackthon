@@ -1,0 +1,45 @@
+/*
+  1045 Final Project - Summer 2018
+
+  Spaceman on Jupiter
+
+  Name: Hugo Carlos Borges Pinto
+  SID: 100311857
+*/
+@import url("https://fonts.googleapis.com/css?family=Orbitron");
+
+body {
+  font-family: "Orbitron", sans-serif;
+  background: #000205;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+canvas {
+  /* Moving BG code: http://jsfiddle.net/AbdiasSoftware/zupjZ/ */
+  background-image: url(images/stars_small_1.png), url(images/nebula_blue.png);
+  background-repeat: repeat-x, repeat-x;
+  background-position: 0 -30px, 0 -30px;
+  background-size: cover, cover;
+}
+
+#ui {
+  display: inline-block;
+  color: white;
+  margin: 0 auto;
+  position: absolute;
+  font-size: 30px;
+  min-width: 1200px;
+}
+
+#time {
+  display: none;
+}
+
+#score {
+  display: none;
+}
