@@ -1,0 +1,117 @@
+<html>
+<head>
+  <script src="./keymaster.js"></script>
+  <script src="./moving_object.js"></script>
+  <script src="./asteroid.js"></script>
+  <script src="./game.js"></script>
+  <script src="./ship.js"></script>
+  <script src="./bullet.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
+  <style type="text/css" media="screen">
+  body {
+    font-family: 'Share Tech Mono';
+    text-align: center;
+	overflow:visible;
+    background-image: url("./trash.jpeg");
+	background-position: center;
+	background-color:lightblue;
+  }
+
+  #points {
+    color: red;
+    font-size: 3em;
+    position: absolute;
+    padding: 20px;
+    bottom: 0;
+    right: 0;
+  }
+  
+  .alert {
+    color: yellow;
+    padding: 10px;
+	text-align: center;
+    width: 100vw;
+    font-size: 2em;
+  }
+  .alert_lose {
+    color: red;
+    padding: 10px;
+	text-align: center;
+    width: 100vw;
+    font-size: 2em;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  canvas {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="points"></div>
+
+  <div class="alert hidden" id="winner">
+    Congratulations! You won!<br><br>
+    CLICK TO PLAY AGAIN.
+  </div>
+  
+  <div class="alert_lose hidden" id="death">
+    The ship was hit and you are dead.<br><br>
+	CLICK TO PLAY AGAIN<br><br>
+  </div>
+  
+  <div class="alert" id="life">
+	Press any key to start the game<br><br>
+  </div>
+
+  <script type="text/javascript">
+    
+    var canvas = document.createElement("canvas");
+    document.body.appendChild(canvas);
+    
+    Asteroids.Game.DIM_X = document.body.clientWidth;
+    Asteroids.Game.DIM_Y = document.body.clientHeight;
+
+    canvas.setAttribute("width", Asteroids.Game.DIM_X);
+    canvas.setAttribute("height", Asteroids.Game.DIM_Y);
+
+    function startGame () {
+      window.removeEventListener('keydown', startGame);
+      document.getElementById('life').style.display = 'none';
+
+      var ctx = canvas.getContext('2d');
+      var game = new Asteroids.Game(ctx);    
+      game.start();      
+    };
+    
+    function restartGame () {
+      Asteroids.Game.GAME_OVER.pause();
+      Asteroids.Game.GAME_OVER.currentTime = 0;
+      
+      document.getElementById('death').style.display = 'none';
+      
+      var ctx = canvas.getContext('2d');
+      var game = new Asteroids.Game(ctx);
+      game.start();      
+    };
+    
+    window.addEventListener('keydown', startGame);
+    
+    var restart = document.getElementById('death');
+    
+    restart.addEventListener('click', restartGame);
+            
+  </script>
+  
+</body>
+</html>
