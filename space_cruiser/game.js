@@ -93,7 +93,7 @@
   Game.prototype.checkWon = function () {
     var shipX = this.ship.pos[0];
 
-    if (shipX >= Game.DIM_X) {
+    if (Game.POINTS >= 10000) {
       document.getElementById('winner').style.display = 'block';
       Game.GAME_WON.play();
       this.stop();
@@ -109,6 +109,7 @@
         this.stop();
       }
     }
+	Game.POINTS = Game.POINTS + 1;
   };
 
   //Game.prototype.removeHitObjects = function(){
@@ -147,13 +148,13 @@
     window.addEventListener('keydown', function (event) {
       var key = event.keyCode;
       if (key == 39) {
-        ship.power([2, 0]);
+        ship.power([5, 0]);
       } else if (key == 37) {
-        ship.power([-2, 0]);
+        ship.power([-5, 0]);
       } else if (key == 38) {
-        ship.power([0, -2]);
+        ship.power([0, -5]);
       } else if (key == 40) {
-        ship.power([0, 2]);
+        ship.power([0, 5]);
       } else if (key == 32) {
         ship.fireBullet();
       }
@@ -209,7 +210,7 @@
   Game.prototype.step = function(){
     this.move();
     this.outOfBounds();
-    this.addAsteroids(Math.floor(Math.random() * 1.2));
+    this.addAsteroids(Math.floor(Math.random() * 1.1));
     //this.removeHitObjects();
     this.draw();
     this.checkCollisions();
@@ -219,7 +220,7 @@
   Game.prototype.start = function(){
     var game = this;
     this.bindKeyHandlers();
-    game.addAsteroids(10);
+    game.addAsteroids(1);
     
     Game.SHIP_ENGINE.addEventListener('ended', function() {
         this.play();
