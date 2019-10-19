@@ -20,7 +20,7 @@
 				  font-size: 30px;
 				  cursor: pointer;
 				  position:absolute;
-				  bottom:350px;
+				  bottom:360px;
 				  right:150px;
 				}
 
@@ -36,7 +36,7 @@
 				  font-size: 30px;
 				  cursor: pointer;
 				  position:absolute;
-				  bottom:250px;
+				  bottom:290px;
 				  right:150px;
 				}
 
@@ -52,11 +52,27 @@
 				  font-size: 30px;
 				  cursor: pointer;
 				  position:absolute;
-				  bottom:150px;
+				  bottom:220px;
 				  right:150px;
 				}
 
 				.buttonC:hover {
+				  background-color: rgba(0,0,0,0);
+				  color: white;
+				}
+				.buttonR {
+				  background-color: rgba(0,0,0,0);
+				  border: none;
+				  color: gray;
+				  text-align: center;
+				  font-size: 30px;
+				  cursor: pointer;
+				  position:absolute;
+				  bottom:150px;
+				  right:150px;
+				}
+
+				.buttonR:hover {
 				  background-color: rgba(0,0,0,0);
 				  color: white;
 				}
@@ -65,8 +81,9 @@
 		</head>
 
 		<body>
-			<input type="buttonA"value="- Mission A -"onclick="location.href='../rulePage/rule.html'"class="buttonA"style="vertical-align:middle">
-			<input type="buttonB"value="- Mission B -"onclick="location.href='../rulePage/rule.html'"class="buttonB"style="vertical-align:middle">
+			<input type="buttonA"value="- Mission A -" onclick="window.open('../game1_space_cruiser/index.html')"class="buttonA"style="vertical-align:middle" target="_blank" rel="noopener noreferrer">
+			<input type="buttonB"value="- Mission B -" onclick="window.open('../game2/bricks_py.html')"class="buttonB"style="vertical-align:middle" target="_blank" rel="noopener noreferrer">
 			<input type="buttonC"value="- Mission C -"onclick="location.href='../rulePage/rule.html'"class="buttonC"style="vertical-align:middle">
+			<input type="buttonR"value="- Return -"onclick="location.href='../index.html'"class="buttonR"style="vertical-align:middle">
 		</body>
 </html>
