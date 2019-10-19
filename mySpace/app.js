@@ -54,9 +54,9 @@ VOLCANO_UP_IMG.src = "images/fireball_square.png";
 const VOLCANO_DOWN_IMG = new Image();
 VOLCANO_DOWN_IMG.src = "images/fireball_down_square.png";
 const SPACEMAN_IMG = new Image();
-SPACEMAN_IMG.src = "images/spaceman.png";
+SPACEMAN_IMG.src = "images/NewPlayer.png";
 const SPACEMAN_THRUSTING_IMG = new Image();
-SPACEMAN_THRUSTING_IMG.src = "images/spaceman_thrusting.png";
+SPACEMAN_THRUSTING_IMG.src = "images/NewPlayerFire.png";
 // Compensate for spaceman img not being perfect square
 const COLLISION_OFFSET = 15;
 
@@ -82,11 +82,11 @@ let gameState = {
     highestScore: 0,
     highestTime: 0,
     // Difficulty variables
-    maxAsteroids: 3,
-    asteroidSpeedMax: 0,
-    maxVolcanoes: 0,
-    volcanoSpeedMax: 0,
-    volcanoChance: 0,
+    maxAsteroids: 1000,
+    asteroidSpeedMax: 1000,
+    maxVolcanoes: 10,
+    volcanoSpeedMax: 10,
+    volcanoChance: 10,
     // Intervals & Timers
     gameInterval: null,
     difficultyInterval: 0,
@@ -414,10 +414,10 @@ function generateVolcanoes() {
   
   function increaseDifficulty() {
     // gameState.maxAsteroids += 1;
-    gameState.asteroidSpeedMax += 1;
-    gameState.maxVolcanoes += 1;
-    gameState.volcanoSpeedMax += 1;
-    gameState.volcanoChance += 1;
+    gameState.asteroidSpeedMax += 10;
+    gameState.maxVolcanoes += 10;
+    gameState.volcanoSpeedMax += 10;
+    gameState.volcanoChance += 10;
   }
   
   function handleDeath(deathCause) {
