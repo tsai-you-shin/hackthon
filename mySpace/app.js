@@ -541,7 +541,7 @@ function drawDeathScreen() {
             gameState.highestTime +
             " second(s)",
         CANVAS_CENTRE_X,
-        CANVAS_BOTTOM - 100
+        CANVAS_BOTTOM - 200
         );
         ctx.fillText(
         death[gameState.deathReason].explanation,
