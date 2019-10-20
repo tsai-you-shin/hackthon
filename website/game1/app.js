@@ -507,11 +507,39 @@ function drawStartScreen() {
     );
         
     ctx.save();
-  
+      
     ctx.textAlign = "center";
     ctx.fillStyle = "orange";
     ctx.font = "bold 75px Orbitron";
-    ctx.fillText("Spaceman against Debris", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 100);
+    ctx.fillText("Spaceman against Debris", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 220);
+    
+    var temp = Math.floor((Math.random() * 60));
+    ctx.fillStyle = "LightBlue";
+    ctx.font = "bold 20px Orbitron";
+    if(temp<10){
+      ctx.fillText("< Do you know? >", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 180);
+      ctx.fillText("57% of debris is fragment due to explosion!!!", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 150);
+    }
+    else if(temp>=10&&temp<=20){
+      ctx.fillText("< Do you know? >", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 180);
+      ctx.fillText("I have never seen someone pass the level with 1000 debris", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 150);
+    }
+    else if(temp>=20&&temp<=30){
+      ctx.fillText("< Do you know? >", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 180);
+      ctx.fillText("There is near 128 million debris smaller than 1cm!!!", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 150);
+    }
+    else if(temp>=30&&temp<=40){
+      ctx.fillText("< Do you know? >", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 180);
+      ctx.fillText("laser is also a method to clean debris!!!", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 150);
+    }
+    else if(temp>=40&&temp<=50){
+      ctx.fillText("< Do you know? >", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 180);
+      ctx.fillText("We can clean debris by burning it through atmosphere!!!", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 150);
+    }
+    else if(temp>=50&&temp<=60){
+      ctx.fillText("< Do you know? >", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 180);
+      ctx.fillText("Lots of device for improving signal in space becomes debris", CANVAS_CENTRE_X, CANVAS_CENTRE_Y - 150);
+    }
   
     ctx.fillStyle = TEXT_COLOR;
     ctx.font = "30px Orbitron";
