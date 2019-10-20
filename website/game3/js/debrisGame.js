@@ -1,9 +1,3 @@
-//import Swal from 'sweetalert2';
-//const Swal = require('sweetalert2');
-//import Swal from './node_modules/sweetalert2/dist/sweetalert2.all.min.js';
-//import 'node_modules/sweetalert2/src/sweetalert2.scss'
-//import Swal from 'https://cdn.jsdelivr.net/npm/sweetalert2@8/src/sweetalert2.js'
-//const Swal = require('sweetalert2')
 const LEFT_KEY = 37;
 const UP_KEY = 38;
 const RIGHT_KEY = 39;
@@ -82,17 +76,16 @@ function playerMove(dt, $container) {
     GAME_STATE.playerX += dt * PLAYER_SPEED;
   }
   else if (GAME_STATE.upPressed) {
-    GAME_STATE.playerY -= dt * PLAYER_SPEED
+    GAME_STATE.playerY -= dt * PLAYER_SPEED;
   }
   else if (GAME_STATE.downPressed) {
-    GAME_STATE.playerY += dt * PLAYER_SPEED
+    GAME_STATE.playerY += dt * PLAYER_SPEED;
   }
 
   GAME_STATE.playerY = clamp(
     GAME_STATE.playerY,
     PLAYER_WIDTH + 20,
-    GAME_HEIGHT - 20 
-  );
+    GAME_HEIGHT - 20);
 
   GAME_STATE.playerX = clamp(
     GAME_STATE.playerX,
@@ -124,17 +117,17 @@ function laserInit($container, x, y) {
 }
 function myalert(debris){
   if(debris.type == 0){
-    alert('Aura');
+    Swal.fire('Aura','Well done','success');
   } else if (debris.type ==1){
-    alert('Cloud Sat')
+    Swal.fire('Cloud Sat','Well done','success');
   } else if (debris.type ==2){
-    alert('Europa')
+    Swal.fire('Europa','Well done','success');
   } else if (debris.type ==3){
-    alert('Fuse')
+    Swal.fire('Fuse','Well done','success');
   } else if (debris.type ==4){
-    alert('Rocket')
+    Swal.fire('Rocket','Well done','success');
   } else if (debris.type ==5){
-    alert('Stone')
+    Swal.fire('Stone','Well done','success');
   } 
 }
 function laserMove(dt, $container) {
@@ -220,26 +213,27 @@ function debrisInit($container,x,y){
 
   $element.className = "debris";
   $container.appendChild($element);
-  const dir = 1;
+  var dir = 1;
   const debris = {x,y,$element, type,dir}; 
   GAME_STATE.debrises.push(debris);
   setPosition($element,x,y);
 }
 
 function debrisMove(dt, $container){
-  const tmp1 = Math.floor(Math.random()*2) * 2 ;
-  var dx = tmp1;
+  const tmp1 = 1;//Math.floor(Math.random()*2) * 2 -1;
+  //var dx = tmp1;
   const debrises = GAME_STATE.debrises;
   for(let i = 0; i < debrises.length; i++){
     const debris = debrises[i];
-    const x = debris.x + dx*debris.dir;
-    const y = debris.y ;
-    if(x < 10 || x > GAME_WIDTH){
+    const x = debris.x ;//dx*debris.dir;
+    const y = debris.y +Date.now()-GAME_STATE.lastTime;
+    //if(x < 10 || x > GAME_WIDTH){
     //  debris.dir = -debris.dir;
-    }
+    //}
     setPosition(debris.$element, x, y);
     const r1 = debris.$element.getBoundingClientRect();
     const player = document.querySelector(".player");
+    alert(debris.$element);
     const r2 = player.getBoundingClientRect();
     if(rectsIntersect(r1,r2)) {
       playerDestroy($container,player);
@@ -260,8 +254,8 @@ function init() {
   const $container = document.querySelector(".game");
   playerInit($container);
   for(let i = 0; i < 11; i++){
-    x = Math.round(Math.random()*800);
-    y = Math.round(Math.random()*300);
+    x = Math.floor(Math.random()*900);
+    y = Math.floor(Math.random()*300);
     debrisInit($container,x,y);
   }
 
@@ -274,7 +268,7 @@ function playerHasWon() {
 
 function update(e) {
   const currentTime = Date.now();
-
+  //if (currentTime%1000 == 0)alert(GAME_STATE.debrises[0].x);
   const dt = (currentTime - GAME_STATE.lastTime) / 1000.0;
 
   if (GAME_STATE.gameOver) {
