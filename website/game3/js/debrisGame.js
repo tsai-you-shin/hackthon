@@ -115,19 +115,40 @@ function laserInit($container, x, y) {
   GAME_STATE.lasers.push(laser);
   setPosition($element, x, y);
 }
+function mySwal(title,text,img){
+  Swal.fire({
+  title: title,
+  text: text,
+  imageUrl: img,
+  imageWidth: 400,
+  imageHeight: 200,
+  imageAlt: 'Custom image',
+  animation: false
+});
+}
 function myalert(debris){
   if(debris.type == 0){
-    Swal.fire('Aura','Well done','success');
+    mySwal('Debris collect!','Aura','img/1.png');
   } else if (debris.type ==1){
-    Swal.fire('Cloud Sat','Well done','success');
+    mySwal('Debris collect!','Cloud Sat','img/2.png');
   } else if (debris.type ==2){
-    Swal.fire('Europa','Well done','success');
+    mySwal('Debris collect!','Europa','img/3.png');
   } else if (debris.type ==3){
-    Swal.fire('Fuse','Well done','success');
+    mySwal('Debris collect!','Fuse','img/4.png');
   } else if (debris.type ==4){
-    Swal.fire('Rocket','Well done','success');
+    mySwal('Debris collect!','Rocket','img/5.png');
   } else if (debris.type ==5){
-    Swal.fire('Stone','Well done','success');
+    mySwal('Debris collect!','Stone','img/6.png');
+  } else if (debris.type ==6){
+    mySwal('Debris collect!','Stone','img/7.png');
+  } else if (debris.type ==7){
+    mySwal('Debris collect!','Stone','img/8.png');
+  } else if (debris.type ==8){
+    mySwal('Debris collect!','Stone','img/9.png');
+  } else if (debris.type ==9){
+    mySwal('Debris collect!','Stone','img/10.png');
+  } else if (debris.type ==10){
+    mySwal('Debris collect!','Stone','img/11.png');
   } 
 }
 function laserMove(dt, $container) {
