@@ -1,0 +1,226 @@
+<html>
+<head>
+
+  <script src="./keymaster.js"></script>
+  <script src="./moving_object.js"></script>
+  <script src="./asteroid.js"></script>
+  <script src="./game.js"></script>
+  <script src="./ship.js"></script>
+  <script src="./bullet.js"></script>
+  <script src="./node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
+  <style type="text/css" media="screen">
+  body {
+    font-family: 'Share Tech Mono';
+    text-align: center;
+	overflow:visible;
+    background-image: url("./trash.jpeg");
+	background-position: center;
+	background-color:lightblue;
+  }
+
+  #points {
+    color: red;
+    font-size: 3em;
+    position: absolute;
+    padding: 20px;
+    bottom: 0;
+    right: 0;
+  }
+  
+  .alert {
+    color: yellow;
+    padding: 10px;
+	text-align: center;
+    width: 100vw;
+    font-size: 2em;
+  }
+  .alert_lose {
+    color: red;
+    padding: 10px;
+	text-align: center;
+    width: 100vw;
+    font-size: 2em;
+  }
+  .border-button {
+		position:relative;
+		display:inline-block;
+		width:200px;
+		height:40px;
+		background-color:#d9f0e6;
+		line-height:29px;
+		color:#35495e;
+		font-family:'arial';
+		text-align:center;
+		text-decoration:none;
+		cursor: pointer;
+		border-radius: 4px;
+		overflow:hidden
+  }
+  .hidden {
+    display: none;
+  }
+  .btn {
+	border: none;
+	background-color: inherit;
+	padding: 14px 28px;
+	font-size: 20px;
+	cursor: pointer;
+	display: inline-block;
+  }
+  .fact1 {color: dodgerblue;}
+
+  
+  canvas {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="points"></div>
+
+  <div class="alert hidden" id="winner">
+    Congratulations! You won!<br><br>
+    CLICK TO PLAY AGAIN.
+  </div>
+  
+  <div class="alert_lose hidden" id="death">
+    The ship was hit and you are dead.<br><br>
+	Click me to learn interesting facts about space debris<br><br>
+	<button aria-label="Try me!" class="border-button" onclick="sweetheart1()">
+		          Fact1
+	</button>
+	<button aria-label="Try me!" class="border-button" onclick="sweetheart2()">
+		          Fact2
+	</button>
+	<button aria-label="Try me!" class="border-button" onclick="sweetheart3()">
+		          quiz1
+	</button>
+	<button aria-label="Try me!" class="border-button" onclick="sweetheart4()">
+		          quiz2
+	</button>
+	<button aria-label="Try me!" class="border-button" onclick="restartGame()">
+		          restart the game
+	</button>
+  </div>
+  
+  <div class="alert" id="life">
+	Press any key to start the game<br><br>
+  </div>
+
+  <script type="text/javascript">
+	function sweetheart1() {
+		Swal.fire({
+			title: 'Space debris knowledge',
+			text: 'Space debris historical Evolution',
+			imageUrl: './1_Rf5LFjaxe213pvBzaC00yg.jpeg',
+			imageWidth: 600,
+			imageHeight: 300,
+			imageAlt: 'Custom image',
+			animation: false
+		})
+	};
+	function sweetheart2() {
+		Swal.fire({
+			title: 'A project called Remove Debris used net as a technique to remove junk in the space',
+			imageUrl: './72949038_570979590373229_5932000209788731392_n.png',
+			imageWidth: 600,
+			imageHeight: 300,
+			imageAlt: 'Custom image',
+			animation: false
+		})
+	};
+	function sweetheart3() {
+		Swal.fire({
+			title: 'The amount of debris smaller than 1 cm is larger than 1 million pieces. Is this statment True?',
+			confirmButtonText: 'True',
+			cancelButtonText: 'False',
+			cancelButtonColor: '#d33',
+			showCancelButton: true,
+			imageWidth: 600,
+			imageHeight: 300,
+			imageAlt: 'Custom image',
+			animation: false
+		}).then((result) => {
+			if (result.value){
+				Swal.fire(
+					'Good job!',
+  				'You clicked the button!',
+					'success')
+			}
+			else{
+				Swal.fire('error')
+			}
+		})
+	};
+	function sweetheart4() {
+		Swal.fire({
+			title: 'This technique can remove debris experimentally, what is the equipment called?',
+			imageUrl: './72581002_527024154742627_4589726297319538688_n.png',
+			confirmButtonText: 'harpoon',
+			cancelButtonText: 'poonhar',
+			cancelButtonColor: '#d33',
+			showCancelButton: true,
+			imageWidth: 600,
+			imageHeight: 300,
+			imageAlt: 'Custom image',
+			animation: false
+		}).then((result) => {
+			if (result.value){
+				Swal.fire(
+					'Good job!',
+  				'You clicked the button!',
+					'success')
+			}
+			else{
+				Swal.fire('error')
+			}
+		})
+	};
+    var canvas = document.createElement("canvas");
+    var canvas = document.createElement("canvas");
+    document.body.appendChild(canvas);
+    
+    Asteroids.Game.DIM_X = document.body.clientWidth;
+    Asteroids.Game.DIM_Y = document.body.clientHeight;
+
+    canvas.setAttribute("width", Asteroids.Game.DIM_X);
+    canvas.setAttribute("height", Asteroids.Game.DIM_Y);
+
+    function startGame () {
+      window.removeEventListener('keydown', startGame);
+      document.getElementById('life').style.display = 'none';
+
+      var ctx = canvas.getContext('2d');
+      var game = new Asteroids.Game(ctx);    
+      game.start();      
+    };
+    
+    function restartGame () {
+      Asteroids.Game.GAME_OVER.pause();
+      Asteroids.Game.GAME_OVER.currentTime = 0;
+      
+      document.getElementById('death').style.display = 'none';
+      
+      var ctx = canvas.getContext('2d');
+      var game = new Asteroids.Game(ctx);
+      game.start();      
+    };
+    
+    window.addEventListener('keydown', startGame);
+    
+    var restart = document.getElementById('death');
+    
+            
+  </script>
+  
+</body>
+</html>
