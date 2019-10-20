@@ -213,27 +213,28 @@ function debrisInit($container,x,y){
 
   $element.className = "debris";
   $container.appendChild($element);
-  var dir = 1;
+  var dir = Math.floor(Math.random()*2) * 2 -1;
+  dir = dir * (Math.floor(Math.random()*5)+1);
   const debris = {x,y,$element, type,dir}; 
   GAME_STATE.debrises.push(debris);
   setPosition($element,x,y);
 }
 
 function debrisMove(dt, $container){
-  const tmp1 = 1;//Math.floor(Math.random()*2) * 2 -1;
-  //var dx = tmp1;
   const debrises = GAME_STATE.debrises;
   for(let i = 0; i < debrises.length; i++){
     const debris = debrises[i];
-    const x = debris.x ;//dx*debris.dir;
-    const y = debris.y +Date.now()-GAME_STATE.lastTime;
-    //if(x < 10 || x > GAME_WIDTH){
-    //  debris.dir = -debris.dir;
-    //}
+    const x = debris.x +debris.dir;
+    const y = debris.y ;
+    if(x < 10 || x > GAME_WIDTH-20){
+      debris.dir = -debris.dir;
+    }
+    debris.x =x;
+    debris.y = y;
     setPosition(debris.$element, x, y);
     const r1 = debris.$element.getBoundingClientRect();
     const player = document.querySelector(".player");
-    alert(debris.$element);
+    //alert(debris.$element);
     const r2 = player.getBoundingClientRect();
     if(rectsIntersect(r1,r2)) {
       playerDestroy($container,player);
